@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
+        </div>
+      </div>
+    </div> 
+
+    <div class="site-section">
+      <div class="container">
+
+        <div class="row mb-5">
+          <div class="col-md-12 order-2">
+
+            <div class="row">
+              <div class="col-md-12 mb-5">
+                <div class="float-md-left mb-4"><h2 class="text-black h5">Shop All</h2></div>
+                 
+              </div>
+            </div>
+            <h2> <span class="badge badge-secondary">{{length}}</span> Search results:</h2>
+            <div class="row mb-5 m-4">
+                {% for item in items %}
+                        <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                        <div class="block-4 text-center border">
+                        {% if user.is_authenticated %}
+                        <figure class="block-4-image">
+                            <a href="/product/{{item.slug}}"><img src="{{item.image.url}}" alt="Image placeholder" class="img-fluid"></a>
+                        </figure>
+                        <div class="block-4-text p-4">
+                            <h3><a href="/product/{{item.slug}}">{{item.title}}</a></h3>
+                            <p class="mb-0">{{item.description}}</p>
+                            <p class="text-primary font-weight-bold">₹{{item.price}}</p>
+                        </div>
+                        {% else %}
+                        <figure class="block-4-image">
+                            <a href="/login"><img src="{{item.image.url}}" alt="Image placeholder" class="img-fluid"></a>
+                        </figure>
+                        <div class="block-4-text p-4">
+                            <h3><a href="/login">{{item.title}}</a></h3>
+                            <p class="mb-0">{{item.description}}</p>
+                            <p class="text-primary font-weight-bold">₹{{item.price}}</p>
+                        </div>
+                        {% endif %}
+                        
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if true %}
+                    <b style="color: red">
+                    <ul>
+                    <li>No search result found try different keywords.</li>
+                    <li>Or contact us.</li>
+                    </ul>
+                    </b>
+                {%endif %}
+
+              
+            </div>
+             
+          </div>
+  
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+{% endblock content %}
